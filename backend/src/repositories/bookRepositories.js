@@ -37,10 +37,18 @@ const update = (id, updatedData) => {
   return books[bookIndex];
 };
 
+const remove = (id) => {
+  const bookIndex = books.findIndex(book => book.id === id);
+  if (bookIndex !== -1) {
+    books.splice(bookIndex, 1); 
+  }
+};
+
 module.exports = {
   getAll,
   create,
   findById,
   update,
+  remove,
   books
 };

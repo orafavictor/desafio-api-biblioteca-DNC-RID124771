@@ -1,6 +1,7 @@
 const bookRepository = require('../repositories/bookRepositories');
 const createBookService = require('../services/createBookServices');
 const updateBookService = require('../services/updateBookServices'); 
+const deleteBookService = require('../services/deleteBookServices');
 const { createBookSchema, updateBookSchema } = require('../schemas/bookSchemas'); 
 
 const getAllBooks = (req, res) => {
@@ -53,4 +54,17 @@ const updateBook = (req, res) => {
   }
 };
 
-module.exports = { getAllBooks, createBook, updateBook };
+const deleteBook = (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    deleteBookService.execute(id);
+
+    res.status(200).json({ mensagem: "Livro deletado com sucesso!" });
+
+  } catch (error) {
+    res.status(404).json({ mensagem: error.message });
+  }
+};
+
+module.exports = { getAllBooks, createBook, updateBook, deleteBook };
