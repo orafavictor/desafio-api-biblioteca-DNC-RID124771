@@ -40,7 +40,32 @@ const createBook = (req, res) => {
   });
 };
 
+const updateBook = (req, res) => {
+  const { id } = req.params;
+  const { titulo, paginas, isbn, editora } = req.body;
+
+  const bookIndex = books.findIndex(book => book.id === parseInt(id));
+
+  if (bookIndex === -1) {
+    return res.status(404).json({ mensagem: "Livro não encontrado." });
+  }
+
+  books[bookIndex] = {
+    id: parseInt(id),
+    titulo,
+    paginas,
+    isbn,
+    editora
+  };
+
+  res.status(200).json({
+    mensagem: "Livro atualizado com sucesso!",
+    livro: books[bookIndex]
+  });
+};
+
 module.exports = {
   getAllBooks,
-  createBook
+  createBook,
+  updateBook
 };

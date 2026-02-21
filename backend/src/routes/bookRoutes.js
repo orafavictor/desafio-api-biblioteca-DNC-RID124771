@@ -6,4 +6,6 @@ router.get('/livros', bookController.getAllBooks);
 
 router.post('/livros', bookController.createBook);
 
+router.put('/livros/:id', bookController.updateBook);
+
 module.exports = router;
