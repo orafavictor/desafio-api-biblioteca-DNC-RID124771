@@ -64,8 +64,23 @@ const updateBook = (req, res) => {
   });
 };
 
+const deleteBook = (req, res) => {
+  const { id } = req.params;
+
+  const bookIndex = books.findIndex(book => book.id === parseInt(id));
+
+  if (bookIndex === -1) {
+    return res.status(404).json({ mensagem: "Livro não encontrado." });
+  }
+
+  books.splice(bookIndex, 1);
+
+  res.status(200).json({ mensagem: "Livro deletado com sucesso!" });
+};
+
 module.exports = {
   getAllBooks,
   createBook,
-  updateBook
+  updateBook,
+  deleteBook
 };
