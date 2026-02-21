@@ -15,17 +15,32 @@ let books = [
   }
 ];
 
-const getAll = () => {
-  return books;
-};
+const getAll = () => books;
 
 const create = (newBook) => {
   books.push(newBook);
   return newBook;
 };
 
+const findById = (id) => {
+  return books.find(book => book.id === id);
+};
+
+const update = (id, updatedData) => {
+  const bookIndex = books.findIndex(book => book.id === id);
+  if (bookIndex === -1) return null;
+
+  books[bookIndex] = {
+    ...books[bookIndex],
+    ...updatedData
+  };
+  return books[bookIndex];
+};
+
 module.exports = {
   getAll,
   create,
-  books 
+  findById,
+  update,
+  books
 };
